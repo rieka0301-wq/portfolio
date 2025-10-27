@@ -1,0 +1,284 @@
+/* ======== 0. 基本設定 & CSS変数 ======== */
+:root {
+    --primary-color: #007bff; /* メインカラー (例: 青) */
+    --secondary-color: #333;  /* メインテキストカラー */
+    --light-bg: #f4f4f4;       /* 明るい背景色 */
+    --text-light: #fefefe;     /* 白いテキスト */
+    --base-font-size: 16px;
+    --container-width: 1100px;
+    --header-height: 80px;
+}
+
+/* 基本的なリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans CJK JP', 'Yu Gothic', sans-serif;
+    line-height: 1.7;
+    color: var(--secondary-color);
+    font-size: var(--base-font-size);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ======== 1. 共通レイアウト & パーツ ======== */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+/* 共通ボタン */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* 少し濃く */
+    border-color: #0056b3;
+}
+
+
+/* ======== 2. ヘッダー & ナビゲーション ======== */
+.header {
+    width: 100%;
+    height: var(--header-height);
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    position: fixed; /* スクロールしても追従 */
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Flexboxでロゴとナビを両端揃え */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header-logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.header-nav ul {
+    display: flex;
+}
+
+.header-nav li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.header-nav a {
+    color: var(--secondary-color);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.header-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* ヘッダーの高さ分、mainの開始位置をずらす */
+main {
+    padding-top: var(--header-height);
+}
+
+
+/* ======== 3. ヒーローセクション ======== */
+.hero {
+    background-color: var(--primary-color); /* 仮の背景色 */
+    /* background-image: url('images/hero-bg.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text-light);
+}
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.hero p {
+    font-size: 1.2rem;
+}
+
+/* ======== 4. About ======== */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0; /* 画像が縮まないように */
+}
+.profile-text {
+    flex-grow: 1; /* テキストエリアが残りの幅を埋める */
+}
+
+/* ======== 5. Skills ======== */
+/* CSS Gridで3カラムレイアウト */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.skill-category {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.skill-category h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+}
+.skill-category li {
+    margin-bottom: 10px;
+}
+
+
+/* ======== 6. Works ======== */
+/* CSS Gridでカードレイアウト */
+.works-grid {
+    display: grid;
+    /* 1カラムの最小幅を300pxとし、
+      コンテナ幅に応じて自動でカラム数を調整する
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.work-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* 角丸を効かせるため */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s;
+}
+.work-item:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.work-image {
+    width: 100%;
+    height: 220px;
+    background-color: #eee;
+    display: flex; /* 仮のテキストを中央寄せ */
+    justify-content: center;
+    align-items: center;
+}
+.work-info {
+    padding: 20px;
+}
+.work-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+.work-info p {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* ======== 7. Contact ======== */
+#contact {
+    text-align: center;
+}
+.contact-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ======== 8. フッター ======== */
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    padding: 30px 0;
+    text-align: center;
+}
+
+
+/* ======== 9. レスポンシブ対応 (簡易) ======== */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Aboutセクションを縦積みに */
+    .profile {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Skillsセクションを縦積みに */
+    .skills-grid {
+        grid-template-columns: 1fr; /* 1カラムにする */
+    }
+
+    /* ヘッダーナビ (簡易) - 本格的にはJSでハンバーガーメニュー */
+    .header-nav {
+        /* この例では簡略化しますが、実際はハンバーガーメニュー推奨 */
+        display: none; 
+    }
+}
